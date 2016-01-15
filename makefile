@@ -3,5 +3,6 @@ all: hangman.c hangman_ASCII.h
 run:
 	./hangman
 clean:
+	rm hangman
 	rm *~
 	rm *.o
