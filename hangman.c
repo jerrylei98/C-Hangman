@@ -6,6 +6,7 @@
 
 #include "hangman_ASCII.h" //header file containing the words and the hangman ascii values from 0-6. words[0-20], definitions[0-20], hangman_numbers[0-6], max_words for cap and rand_num
 hangman_t game_set;
+int *current_game; //use to define size of array in setup_game
  
 int win_lose(int current_game[]){ //checks if current_game has any fails, returns 0 if game is not won, returns 1 if game is won (everything in current_game is 1
   int c1 = sizeof(current_game)/sizeof(int); //elements in current_game
