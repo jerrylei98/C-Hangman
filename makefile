@@ -1,8 +1,9 @@
-all: hangman.c hangman_ASCII.h
-	gcc hangman.c -o hangman
+all: 
+
+hangman: hangman.c hangman.h test.c
+	gcc -o test.c hangman
 run:
 	./hangman
 clean:
-	rm hangman
 	rm *~
 	rm *.o
