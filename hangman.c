@@ -3,10 +3,84 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <fcntl.h>
 
 #include "hangman.h" //header file containing the words and the hangman ascii values from 0-6. words[0-20], definitions[0-20], hangman_numbers[0-6], max_words for cap and rand_num
 
-hangman_t game_set;
+
+char *hangman_numbers[7] = {
+"\
+\n +---+\
+\n |   |\
+\n     |\
+\n     |\
+\n     |\
+\n     |\
+\n========\n", 
+
+"\
+\n +---+\
+\n |   |\
+\n O   |\
+\n     |\
+\n     |\
+\n     |\
+\n========\n",
+
+"\
+\n +---+\
+\n |   |\
+\n O   |\
+\n |   |\
+\n     |\
+\n     |\
+\n========\n",
+
+"\
+\n +---+\
+\n |   |\
+\n O   |\
+\n/|   |\
+\n     |\
+\n     |\
+\n========\n",
+
+"\
+\n +---+\
+\n |   |\
+\n O   |\
+\n/|\\  |\
+\n     |\
+\n     |\
+\n========\n",
+
+"\
+\n +---+\
+\n |   |\
+\n O   |\
+\n/|\\  |\
+\n |   |\
+\n/    |\
+\n========\n",
+
+"\
+\n +---+\
+\n |   |\
+\n O   |\
+\n/|\\  |\
+\n |   |\
+\n/ \\  |\
+\n========\n"
+
+};
+
+int max_words = 4;
+
+char *words[4] = {"Majority Rule", "Checks and Balances", "Unitary System", "Federalism"};
+
+
+char *definitions[4] = {"A fundamental democratic principle requiring that the majority's view be respected. Nonetheless", "System in which each branch of government can limit the power of the other two branches. For example", "System of government in which all power is invested in a central government.", "A system of government in which power is divided by a written constitution between a central government and regional governments. As a result"};
+
 
 void setup_game(){
   

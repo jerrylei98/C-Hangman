@@ -9,6 +9,6 @@
 
 int main(){
   setup_game();
-  printf("\nWord: %s\nDefinition: %s\n", game_set.given_word, game_set.given_def);
+  printf("\nWord: %s\nDefinition %s\n", game_set.given_word, game_set.given_def);
   return 0;
 }
