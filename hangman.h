@@ -3,8 +3,9 @@
 
 #include <stdio.h>
 
+void str_upper(char *str);
 int win_lose(int current_game[]);
-int rand_num(int DIVIDE);
+int rand_num(int divide);
 void setup_game();
 
 typedef struct game{
