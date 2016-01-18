@@ -4,15 +4,8 @@
 #include <fcntl.h>
 
 int win_lose(int current_game[]);
+int rand_num(int DIVIDE);
 void setup_game();
-
-int rand_num(int DIVIDE){
-  int c = open("/dev/urandom", O_RDONLY);
-  unsigned int num;
-  read(c,&num,4);
-  close(c);
-  return num % DIVIDE;
-}
 
 typedef struct game{
   int index_word;
@@ -23,7 +16,7 @@ typedef struct game{
   int *current_game;
 } hangman_t;
 
-hangman_t game_set;
+//hangman_t game_set;
 
 char *hangman_numbers[7] = {
 "\
