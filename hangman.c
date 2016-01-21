@@ -91,24 +91,24 @@ void setup_game(){
   game_set.given_def = definitions[game_set.index_word];
   game_set.length_word = strlen(game_set.given_word);
 
-  int check_win[game_set.length_word];
-  game_set.current_game = check_win;
-
+  int current_game_t[game_set.length_word];
   int c1 = 0;
-  while (c1 < strlen(game_set.given_word)){
-    if(game_set.given_word[c1] == ' ')
-      game_set.current_game[c1] = 2;
-    else
-      game_set.current_game[c1] = 0;
-    //  printf("%d ", game_set.current_game[c1]);
-    c1++;
-  }
+  while(c1 < game_set.length_word){
+    if(game_set.given_word
+    current_game_t 
+
 }
 
 void print_game(){
   printf("\n%s\n", hangman_numbers[6]);//game_set.current_hangman]);
-  printf("\n%s\n", game_set.given_word); //NEEDS TO BE REPLACED BY UNDERLINE
+  printf("\n\t%s\n", game_set.given_word); 
   printf("\n%s\n", game_set.given_def);
+  int c1 = 0;
+  while(c1 < game_set.length_word){
+    printf(" %d", *(game_set.current_game +c1));
+    c1++;
+  }
+  show_current_game();
 }
 
 
@@ -132,8 +132,19 @@ char *str_upper(char *str){
 }
   
 
-char *show_current_game(){
-  int i = 0;
+void show_current_game(){
+  int c1 = 0;
+  printf("\t");
+  while(c1 < game_set.length_word){
+    if(game_set.current_game[c1] == 0)//game_set.current_game[c1] == 0)
+      printf(" _");
+    if(game_set.current_game[c1] == 1)
+      printf(" %C", game_set.given_word[c1]);
+    if(game_set.current_game[c1] == 2)
+      printf("\n\t");
+    c1++;
+  }
+  printf("\n");
 }
 
 int win_lose(int current_game[]){ //checks if current_game has any fails, returns 0 if game is not won, returns 1 if game is won (everything in current_game is 1
@@ -156,7 +167,7 @@ int main(){
   printf("\nLower: %s", funtimes);
   funtimes = str_upper(funtimes);
   printf("\nUpper: %s\n", funtimes);*/
-
+  printf("\n\n");
   return 0;
 }
 
