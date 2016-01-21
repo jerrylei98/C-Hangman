@@ -97,7 +97,7 @@ void setup_game(){
   int c1 = 0;
   while (c1 < strlen(game_set.given_word)){
     if(game_set.given_word[c1] == ' ')
-      game_set.current_game[c1] = 1;
+      game_set.current_game[c1] = 2;
     else
       game_set.current_game[c1] = 0;
     //  printf("%d ", game_set.current_game[c1]);
@@ -113,10 +113,9 @@ int rand_num(int DIVIDE){
   return num % DIVIDE;
 }
 
-void str_upper(char *str){
-  while(*str!='\0')
-    *str = toupper(*str);
-}
+char *word(){
+  int i = 0;
+  char *
 
 int win_lose(int current_game[]){ //checks if current_game has any fails, returns 0 if game is not won, returns 1 if game is won (everything in current_game is 1
   int c1 = sizeof(current_game)/sizeof(int); //elements in current_game
