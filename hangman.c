@@ -113,9 +113,21 @@ int rand_num(int DIVIDE){
   return num % DIVIDE;
 }
 
-char *word(){
+char *str_upper(char *str){
+  char *str2 = malloc(strlen(str)+1);
+  int c1 = 0;
+  while(c1 < strlen(str)){
+    str2[c1] = toupper(str[c1]);
+    c1++;
+  }
+  str2[c1] = '\0';
+  return str2;
+}
+  
+
+char *show_current_game(){
   int i = 0;
-  char *
+}
 
 int win_lose(int current_game[]){ //checks if current_game has any fails, returns 0 if game is not won, returns 1 if game is won (everything in current_game is 1
   int c1 = sizeof(current_game)/sizeof(int); //elements in current_game
@@ -135,7 +147,7 @@ int main(){
   //printf("\nWord: %s\nDefinition: %s\n", game_set.given_word, game_set.given_def);
   char *funtimes = "funTiMES";
   printf("\nLower: %s", funtimes);
-  str_upper(funtimes);
+  funtimes = str_upper(funtimes);
   printf("\nUpper: %s\n", funtimes);
 
   return 0;
