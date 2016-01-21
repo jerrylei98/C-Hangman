@@ -11,67 +11,67 @@
 
 char *hangman_numbers[7] = {
 "\
-\n +---+\
-\n |   |\
-\n     |\
-\n     |\
-\n     |\
-\n     |\
-\n========\n", 
+\n\t +---+\
+\n\t |   |\
+\n\t     |\
+\n\t     |\
+\n\t     |\
+\n\t     |\
+\n\t========\n", 
 
 "\
-\n +---+\
-\n |   |\
-\n O   |\
-\n     |\
-\n     |\
-\n     |\
-\n========\n",
+\n\t +---+\
+\n\t |   |\
+\n\t O   |\
+\n\t     |\
+\n\t     |\
+\n\t     |\
+\n\t========\n",
 
 "\
-\n +---+\
-\n |   |\
-\n O   |\
-\n |   |\
-\n     |\
-\n     |\
-\n========\n",
+\n\t +---+\
+\n\t |   |\
+\n\t O   |\
+\n\t |   |\
+\n\t     |\
+\n\t     |\
+\n\t========\n",
 
 "\
-\n +---+\
-\n |   |\
-\n O   |\
-\n/|   |\
-\n     |\
-\n     |\
-\n========\n",
+\n\t +---+\
+\n\t |   |\
+\n\t O   |\
+\n\t/|   |\
+\n\t     |\
+\n\t     |\
+\n\t========\n",
 
 "\
-\n +---+\
-\n |   |\
-\n O   |\
-\n/|\\  |\
-\n     |\
-\n     |\
-\n========\n",
+\n\t +---+\
+\n\t |   |\
+\n\t O   |\
+\n\t/|\\  |\
+\n\t     |\
+\n\t     |\
+\n\t========\n",
 
 "\
-\n +---+\
-\n |   |\
-\n O   |\
-\n/|\\  |\
-\n |   |\
-\n/    |\
-\n========\n",
+\n\t +---+\
+\n\t |   |\
+\n\t O   |\
+\n\t/|\\  |\
+\n\t |   |\
+\n\t/    |\
+\n\t========\n",
 
 "\
-\n +---+\
-\n |   |\
-\n O   |\
-\n/|\\  |\
-\n |   |\
-\n/ \\  |\
-\n========\n"
+\n\t +---+\
+\n\t |   |\
+\n\t O   |\
+\n\t/|\\  |\
+\n\t |   |\
+\n\t/ \\  |\
+\n\t========\n"
 
 };
 
@@ -87,7 +87,7 @@ void setup_game(){
   game_set.current_hangman = 0;
 
   game_set.index_word = rand_num(max_words);
-  game_set.given_word = words[game_set.index_word];
+  game_set.given_word = str_upper(words[game_set.index_word]);
   game_set.given_def = definitions[game_set.index_word];
   game_set.length_word = strlen(game_set.given_word);
 
@@ -104,6 +104,13 @@ void setup_game(){
     c1++;
   }
 }
+
+void print_game(){
+  printf("\n%s\n", hangman_numbers[6]);//game_set.current_hangman]);
+  printf("\n%s\n", game_set.given_word); //NEEDS TO BE REPLACED BY UNDERLINE
+  printf("\n%s\n", game_set.given_def);
+}
+
 
 int rand_num(int DIVIDE){
   int c = open("/dev/urandom", O_RDONLY);
@@ -143,12 +150,12 @@ int win_lose(int current_game[]){ //checks if current_game has any fails, return
 
 
 int main(){
-  //  setup_game();
-  //printf("\nWord: %s\nDefinition: %s\n", game_set.given_word, game_set.given_def);
-  char *funtimes = "funTiMES";
+  setup_game();
+  print_game();
+  /*  char *funtimes = "funTiMES";
   printf("\nLower: %s", funtimes);
   funtimes = str_upper(funtimes);
-  printf("\nUpper: %s\n", funtimes);
+  printf("\nUpper: %s\n", funtimes);*/
 
   return 0;
 }
