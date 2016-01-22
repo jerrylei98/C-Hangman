@@ -164,7 +164,7 @@ int win_lose(int current_game[]){ //checks if current_game has any fails, return
 }
   
 void update_current_game(char *str){ //changes the game_set.current_game by checking if str has is only 1 char, or matches the game_set.given_word. If it is longer than 1, does not check and does not add to game_set.current_hangman. 
-  if(str
+  if(strlen(char)
 
 }
 
