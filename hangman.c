@@ -75,15 +75,15 @@ char *hangman_numbers[7] = {
 
 };
 
-int max_words = 4;
+int max_words = 1;
 
-char *words[4] = {"Majority Rule", "Checks and Balances", "Unitary System", "Federalism"};
-
-
-char *definitions[4] = {"A fundamental democratic principle requiring that the majority's view be respected. Nonetheless", "System in which each branch of government can limit the power of the other two branches. For example", "System of government in which all power is invested in a central government.", "A system of government in which power is divided by a written constitution between a central government and regional governments. As a result"};
+char *words[1] = {"Majority Rule"};//, "Checks and Balances", "Unitary System", "Federalism"};
 
 
-void setup_game(){
+char *definitions[1] = {"A fundamental democratic principle requiring that the majority's view be respected. Nonetheless"};//, "System in which each branch of government can limit the power of the other two branches. For example", "System of government in which all power is invested in a central government.", "A system of government in which power is divided by a written constitution between a central government and regional governments. As a result"};
+
+
+void setup_game(void){
   game_set.current_hangman = 0;
 
   game_set.index_word = rand_num(max_words);
@@ -100,11 +100,14 @@ void setup_game(){
       game_set.current_game[c1] = 0;
     c1++;
   }
-  //game_set.current_game = current_game_t;
-
+  c1 = 0;
+  while(c1 < 26){
+    game_set.char_guess[c1] = 0;
+    c1++;
+  }
 }
 
-void print_game(){
+void print_game(void){
   printf("\n%s\n", hangman_numbers[game_set.current_hangman]);
   /*printf("\n\t%s\n", game_set.given_word); 
   int c1 = 0;
@@ -114,6 +117,7 @@ void print_game(){
   }
   Used only to check characters -- TESTING PURPOSES ONLY*/ 
   show_current_game();
+  show_char_guessed();
   printf("\n%s\n", game_set.given_def);
 }
 
@@ -138,7 +142,7 @@ char *str_upper(char *str){
 }
   
 
-void show_current_game(){
+void show_current_game(void){
   int c1 = 0;
   printf("\t");
   while(c1 < game_set.length_word){
@@ -153,10 +157,24 @@ void show_current_game(){
   printf("\n");
 }
 
-int win_lose(int current_game[]){ //checks if current_game has any fails, returns 0 if game is not won, returns 1 if game is won (everything in current_game is 1
-  int c1 = sizeof(current_game)/sizeof(int); //elements in current_game
-  while(c1 > 0){
-    if(current_game[c1] == 0)
+void show_char_guessed(void){
+  int c1 = 0;
+  printf("\tCharacters Guessed:");
+  while(c1 < 26){
+    if(game_set.char_guess[c1] == 1){
+      char char_show = c1 + 65;
+      printf(" %c", char_show);
+    }
+    c1++;
+  }
+}
+
+int win_lose(void){ //checks if current_game has any fails, returns 0 if game is not won, returns 1 if game is won (everything in current_game is 1
+  if(game_set.current_hangman == 7)
+    return 2;
+  int c1 = 0; 
+  while(c1 < game_set.length_word){
+    if(game_set.current_game[c1] == 0)
       return 0;
     c1--;
   }
@@ -164,21 +182,67 @@ int win_lose(int current_game[]){ //checks if current_game has any fails, return
 }
   
 void update_current_game(char *str){ //changes the game_set.current_game by checking if str has is only 1 char, or matches the game_set.given_word. If it is longer than 1, does not check and does not add to game_set.current_hangman. 
-  if(str
-
+  if(strlen(str) == strlen(game_set.given_word)){ //game finished
+    if(strcmp(str_upper(str), game_set.given_word) == 0){
+      int c1 = 0;
+      while(c1 < game_set.length_word){
+	game_set.current_game[c1] = 1;
+	c1++;
+      }
+    }
+    else
+      game_set.current_hangman++;
+    return;
+  }
+  if(strlen(str) == 1){ //guess 1 character
+    char j = toupper(str[0]);
+    if(j == ' ') //space is not a letter that can be guessed
+      return;
+    if(game_set.char_guess[j-65] == 1) //character has been guessed before
+      return;
+    if(game_set.char_guess[j-65] == 0){
+      game_set.char_guess[j-65] = 1;
+      int c1 = 0;
+      int yes_no = 0;
+      while(c1 < game_set.length_word){
+	if(game_set.given_word[c1] == j){
+	  game_set.current_game[c1] = 1;
+	  yes_no++;
+	}
+	c1++;
+      }
+      if(yes_no > 0)
+	return;
+      if(yes_no == 0){
+	game_set.current_hangman++;      
+	return;
+      }
+    }
+  }
 }
+      
 
 
-
+/*
 int main(){
   setup_game();
   print_game();
   /*  char *funtimes = "funTiMES";
   printf("\nLower: %s", funtimes);
   funtimes = str_upper(funtimes);
-  printf("\nUpper: %s\n", funtimes);*/
+  printf("\nUpper: %s\n", funtimes);
+  update_current_game("m");
+  print_game();
+  update_current_game("R");
+  print_game();
+  update_current_game("A");
+  print_game();
+  update_current_game("MaJorIty RuLe");
+  print_game();
+
+
   printf("\n\n");
   return 0;
-}
+}*/
 
 
