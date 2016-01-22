@@ -91,24 +91,30 @@ void setup_game(){
   game_set.given_def = definitions[game_set.index_word];
   game_set.length_word = strlen(game_set.given_word);
 
-  int current_game_t[game_set.length_word];
+  //int current_game_t[game_set.length_word];
   int c1 = 0;
   while(c1 < game_set.length_word){
-    if(game_set.given_word
-    current_game_t 
+    if(game_set.given_word[c1] == ' ')
+      game_set.current_game[c1] = 2;
+    if(game_set.given_word[c1] != ' ')
+      game_set.current_game[c1] = 0;
+    c1++;
+  }
+  //game_set.current_game = current_game_t;
 
 }
 
 void print_game(){
   printf("\n%s\n", hangman_numbers[6]);//game_set.current_hangman]);
-  printf("\n\t%s\n", game_set.given_word); 
-  printf("\n%s\n", game_set.given_def);
+  /*printf("\n\t%s\n", game_set.given_word); 
   int c1 = 0;
   while(c1 < game_set.length_word){
     printf(" %d", *(game_set.current_game +c1));
     c1++;
   }
+  Used only to check characters -- TESTING PURPOSES ONLY*/ 
   show_current_game();
+  printf("\n%s\n", game_set.given_def);
 }
 
 
@@ -157,6 +163,10 @@ int win_lose(int current_game[]){ //checks if current_game has any fails, return
   return 1;
 }
   
+void update_current_game(char *str){ //changes the game_set.current_game by checking if str has is only 1 char, or matches the game_set.given_word. If it is longer than 1, does not check and does not add to game_set.current_hangman. 
+  if(str
+
+}
 
 
 
