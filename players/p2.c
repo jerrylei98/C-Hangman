@@ -38,7 +38,7 @@ int main(){
 
   while(1){
     fgets(buffer, sizeof(buffer), stdin);
-    strtok(buffer, "\n");
+    //    strtok(buffer, "\n");
 
     write(to, buffer, sizeof(buffer));
     read(from, buffer, sizeof(buffer));

@@ -22,7 +22,7 @@ int handshake(int *from){
   read(*from, buffer, sizeof(buffer));
   printf("Client %s reached.\n", buffer);
   to = open(buffer, O_WRONLY);
-  strncpy(buffer, "Reached", sizeof(buffer));
+  strncpy(buffer, "Ready.", sizeof(buffer));
   write(to, buffer, sizeof(buffer));
 
   return to;
@@ -31,10 +31,12 @@ int handshake(int *from){
 void connect(int from, int to){
   char buffer[1024];
   while(read(from, buffer, sizeof(buffer))){
+    printf("%s", buffer);
     update_current_game(buffer);
-    char *buff = print_game();
-    write(to, buff, sizeof(buff));
+    strcpy(buffer, print_game());
+    write(to, buffer, sizeof(buffer));
   }
+  
 }
 
 static void sighandler(int signo){
@@ -54,8 +56,9 @@ int main(){
   int from;
   while(1){
     printf("Waiting...\n");
+    printf("%s", print_game());
     to = handshake(&from);
-    connect(to, from);
+    connect(from, to);
     close(to);
   }
   return 0;
