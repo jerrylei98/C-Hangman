@@ -107,18 +107,25 @@ void setup_game(void){
   }
 }
 
-void print_game(void){
-  printf("\n%s\n", hangman_numbers[game_set.current_hangman]);
-  /*printf("\n\t%s\n", game_set.given_word); 
-  int c1 = 0;
-  while(c1 < game_set.length_word){
-    printf(" %d", *(game_set.current_game +c1));
-    c1++;
-  }
-  Used only to check characters -- TESTING PURPOSES ONLY*/ 
-  show_current_game();
-  show_char_guessed();
-  printf("\n%s\n", game_set.given_def);
+char *print_game(void){ //this malloc needs to be freed.
+  char *return_string = malloc(1024);
+  strcpy(return_string, "");
+  strcat(return_string, hangman_numbers[game_set.current_hangman]);
+
+  char *s2 = show_current_game();
+  strcat(return_string, s2);
+  free(s2);
+  
+  char *s3 = show_char_guessed();
+  strcat(return_string, "\n\t\t");
+  strcat(return_string, s3);
+  free(s3);
+
+  char *s4 = game_set.given_def;
+  strcat(return_string, "\n\t");
+  strcat(return_string, s4);
+  return return_string;
+
 }
 
 
@@ -142,31 +149,47 @@ char *str_upper(char *str){
 }
   
 
-void show_current_game(void){
+char *show_current_game(void){
   int c1 = 0;
-  printf("\t");
+  char return_string[1024] = "\t";
+  int c2 = 1;
   while(c1 < game_set.length_word){
-    if(game_set.current_game[c1] == 0)//game_set.current_game[c1] == 0)
-      printf(" _");
-    if(game_set.current_game[c1] == 1)
-      printf(" %C", game_set.given_word[c1]);
-    if(game_set.current_game[c1] == 2)
-      printf("\n\t");
+    if(game_set.current_game[c1] == 0){
+      return_string[c2] = ' ';
+      return_string[c2+1] = '_';
+    }
+    if(game_set.current_game[c1] == 1){
+      return_string[c2] = ' ';
+      return_string[c2+1] = game_set.given_word[c1];      
+    }
+    if(game_set.current_game[c1] == 2){
+      return_string[c2] = '\n';
+      return_string[c2+1] = '\t';
+    }
     c1++;
+    c2+=2;
   }
-  printf("\n");
+  char *result = malloc(c2 + 1);
+  strncpy(result, return_string, c2);
+  return result;
 }
 
-void show_char_guessed(void){
+char *show_char_guessed(void){
   int c1 = 0;
-  printf("\tCharacters Guessed:");
+  char return_string[1024] = "\tCharacters Guessed:";
+  int c2 = 20; //length of return_string at this point
   while(c1 < 26){
     if(game_set.char_guess[c1] == 1){
       char char_show = c1 + 65;
-      printf(" %c", char_show);
+      return_string[c2] = ' ';
+      return_string[c2+1] = char_show;
+      c2+=2;
     }
     c1++;
   }
+  char *result = malloc(c2+1);
+  strncpy(result, return_string,c2);
+  return result;
 }
 
 int win_lose(void){ //checks if current_game has any fails, returns 0 if game is not won, returns 1 if game is won (everything in current_game is 1
@@ -226,23 +249,26 @@ void update_current_game(char *str){ //changes the game_set.current_game by chec
 /*
 int main(){
   setup_game();
-  print_game();
+  printf("%s",print_game());
   /*  char *funtimes = "funTiMES";
   printf("\nLower: %s", funtimes);
   funtimes = str_upper(funtimes);
   printf("\nUpper: %s\n", funtimes);
+  */
+  /*
   update_current_game("m");
   print_game();
   update_current_game("R");
   print_game();
-  update_current_game("A");
+  update_current_game("c");
   print_game();
   update_current_game("MaJorIty RuLe");
   print_game();
-
+  
 
   printf("\n\n");
   return 0;
-}*/
+}
+  */
 
 

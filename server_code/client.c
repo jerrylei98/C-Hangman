@@ -35,6 +35,9 @@ int main(int argc, char **argv){
     exit(0);
   }
   read(socket_id, buffer, sizeof(buffer));
+  char send[256];
+  fgets(send, 256, stdin);
+  write(socket_id, send, strlen(send));
   printf("<client> received: [%s] \n", buffer);
   close(socket_id);
     

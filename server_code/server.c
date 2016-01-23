@@ -39,8 +39,12 @@ int main(){
   printf("<server> connected: %d\n", socket_client);
   
   setup_game();
-  write(socket_client, "char", 6);
-  
+  char buffer[256];
+  while(game_set.current_hangman < 7){
+    char *temp = print_game();
+    write(socket_client, temp, strlen(temp));
+    read(socket_id, buffer, sizeof(buffer));
+  }
   close(socket_client);
   close(socket_id);
     
