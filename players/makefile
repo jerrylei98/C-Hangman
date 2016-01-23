@@ -1,8 +1,14 @@
-all: hangman.c hangman.h word_giver.c
-	gcc -c hangman.c
-	gcc -c word_giver.c
-	gcc -o word_giver hangman.o word_giver.o
-	gcc -o word_guesser word_guesser.c
+all: hangman.c hangman.h p1.c p2.c
+	@gcc -c hangman.c
+	@gcc -c p1.c
+	@gcc -o p1 hangman.o p1.o
+	@gcc -o p2 p2.c
+	@echo p1 picks the word/gives a clue
+	@echo p2 guesses until the game ends
+clean:
+	rm *.o
+	rm p1
+	rm p2
+	rm *.~
 
-run:
-	./server
+
