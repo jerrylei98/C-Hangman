@@ -75,12 +75,12 @@ char *hangman_numbers[7] = {
 
 };
 
-int max_words = 1;
+int max_words = 4;
 
-char *words[1] = {"Majority Rule"};//, "Checks and Balances", "Unitary System", "Federalism"};
+char *words[4] = {"Majority Rule", "Checks and Balances", "Unitary System", "Federalism"};
 
 
-char *definitions[1] = {"A fundamental democratic principle requiring that the majority's view be respected. Nonetheless"};//, "System in which each branch of government can limit the power of the other two branches. For example", "System of government in which all power is invested in a central government.", "A system of government in which power is divided by a written constitution between a central government and regional governments. As a result"};
+char *definitions[4] = {"A fundamental democratic principle requiring that the majority's view be respected. Nonetheless", "System in which each branch of government can limit the power of the other two branches. For example", "System of government in which all power is invested in a central government.", "A system of government in which power is divided by a written constitution between a central government and regional governments. As a result"};
 
 
 void setup_game(void){
@@ -91,7 +91,7 @@ void setup_game(void){
   game_set.given_def = definitions[game_set.index_word];
   game_set.length_word = strlen(game_set.given_word);
 
-  //int current_game_t[game_set.length_word];
+
   int c1 = 0;
   while(c1 < game_set.length_word){
     if(game_set.given_word[c1] == ' ')
@@ -199,7 +199,7 @@ int win_lose(void){ //checks if current_game has any fails, returns 0 if game is
   while(c1 < game_set.length_word){
     if(game_set.current_game[c1] == 0)
       return 0;
-    c1--;
+    c1++;
   }
   return 1;
 }
