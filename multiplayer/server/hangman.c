@@ -79,8 +79,8 @@ void setup_game(void){
   game_set.current_hangman = 0;
 
   //  game_set.index_word = rand_num(max_words);
-  game_set.given_word //FGETS THIS= str_upper(words[game_set.index_word]);
-    game_set.given_def //FGETS THIS AS CLUE= definitions[game_set.index_word];
+  game_set.given_word = "Expedition"; //FGETS THIS= str_upper(words[game_set.index_word]);
+  game_set.given_def = "SUV made by Ford"; //FGETS THIS AS CLUE= definitions[game_set.index_word];
   game_set.length_word = strlen(game_set.given_word);
 
 
