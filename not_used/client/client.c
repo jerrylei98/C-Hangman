@@ -12,7 +12,7 @@
 
 int main(int argc, char **argv){
   int socket_id;
-  char buffer[256];
+  char buffer[1024];
   int i;
 
   socket_id=socket(AF_INET, SOCK_STREAM, 0);
@@ -27,8 +27,18 @@ int main(int argc, char **argv){
   i = connect(socket_id, (struct sockaddr *) &sock, sizeof(sock));
   printf("<client> connect returned %d\n", i);
 
-  read(socket_id, buffer, sizeof(buffer));
-  printf("<client> received: [%s] \n", buffer);
+  while(1){
+    int LINE_CAP = 1024;
+    char line[LINE_CAP];
+    printf("\nEnter guess (single char or full word): ");
+    fgets(line, LINE_CAP, stdin);
+    if(line[strlen(line - 1)]=='\n')
+      line[strlen(line - 1)] = '\0';
+    char *receive_line = line;
+    send(socket_id, receive_line, sizeof(receive_line), 0);
+    read(socket_id, buffer, sizeof(buffer));
+    printf("<client> received: \n%s \n", buffer);
+  }
   close(socket_id);
     
   return 0;
