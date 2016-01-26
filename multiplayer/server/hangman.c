@@ -75,12 +75,20 @@ char *hangman_numbers[7] = {
 
 };
 
+int max_words = 4;
+
+char *words[4] = {"Majority Rule", "Checks and Balances", "Unitary System", "Federalism"};
+
+
+char *definitions[4] = {"A fundamental democratic principle requiring that the majority's view be respected. Nonetheless", "System in which each branch of government can limit the power of the other two branches. For example", "System of government in which all power is invested in a central government.", "A system of government in which power is divided by a written constitution between a central government and regional governments. As a result"};
+
+
 void setup_game(void){
   game_set.current_hangman = 0;
 
-  //  game_set.index_word = rand_num(max_words);
-  game_set.given_word = "Expedition"; //FGETS THIS= str_upper(words[game_set.index_word]);
-  game_set.given_def = "SUV made by Ford"; //FGETS THIS AS CLUE= definitions[game_set.index_word];
+  game_set.index_word = rand_num(max_words);
+  game_set.given_word = str_upper(words[game_set.index_word]);
+  game_set.given_def = definitions[game_set.index_word];
   game_set.length_word = strlen(game_set.given_word);
 
 
