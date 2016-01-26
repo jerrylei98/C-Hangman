@@ -9,6 +9,8 @@
 #include <sys/socket.h>  
 #include <netinet/in.h>
 
+#include "hangman.h"
+
 int main(){
   int socket_id, socket_client;
   //ip address, type of port, port, protocol
