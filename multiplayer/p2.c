@@ -46,6 +46,7 @@ int main(){
   char buffer[1024];
 
   to_server = chandshake(&from_server);
+  
 
   while(read(from_server,buffer,sizeof(buffer))){
     printf("%s\n", buffer);
