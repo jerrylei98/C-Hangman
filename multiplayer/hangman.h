@@ -10,7 +10,7 @@ int win_lose(void); //checks if there is anything in the array that has 0, meani
 int rand_num(int divide); //random number to grab random word(server sided)
 
 void update_current_game(char *str);
-void setup_game(void);
+void setup_game(char *word, char *clue);
 char *print_game(void); //prints the hangman things that are needed (hangman ascii, word with holes, definition + more)
 
 

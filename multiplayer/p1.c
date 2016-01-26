@@ -41,9 +41,28 @@ static void sighandler(int signo){
 }
 
 int main(){
-  signal(SIGINT, sighandler);
 
-  setup_game();
+  //creating own word/clue
+  int WORD_CAP = 1024;
+  char word[WORD_CAP];
+  printf("\nWord: ");
+  fgets(word, WORD_CAP, stdin);
+  if(word[strlen(word)-1] == '\n')
+    word[strlen(word)-1] = '\0';
+
+  char clue[WORD_CAP];
+  printf("\nClue: ");
+  fgets(clue, WORD_CAP, stdin);
+  if(clue[strlen(clue)-1] == '\n')
+    clue[strlen(clue)-1] = '\0';
+
+  setup_game(word, clue);
+  //connection stuff
+
+  printf("\n\n");
+  signal(SIGINT, sighandler);
+  //setup_game();
+
   int to_client;
   int from_client;
 

@@ -75,20 +75,14 @@ char *hangman_numbers[7] = {
 
 };
 
-int max_words = 4;
 
-char *words[4] = {"Majority Rule", "Checks and Balances", "Unitary System", "Federalism"};
-
-
-char *definitions[4] = {"A fundamental democratic principle requiring that the majority's view be respected. Nonetheless", "System in which each branch of government can limit the power of the other two branches. For example", "System of government in which all power is invested in a central government.", "A system of government in which power is divided by a written constitution between a central government and regional governments. As a result"};
-
-
-void setup_game(void){
+void setup_game(char *word, char *clue){
   game_set.current_hangman = 0;
-
-  game_set.index_word = rand_num(max_words);
-  game_set.given_word = str_upper(words[game_set.index_word]);
-  game_set.given_def = definitions[game_set.index_word];
+  
+  //  game_set.index_word = rand_num(max_words);
+  game_set.given_word = str_upper(word);//str_upper(words[game_set.index_word]);
+  game_set.given_def = clue;//definitions[game_set.index_word];
+  
   game_set.length_word = strlen(game_set.given_word);
 
 
@@ -205,7 +199,7 @@ int win_lose(void){ //checks if current_game has any fails, returns 0 if game is
 }
   
 void update_current_game(char *str){ //changes the game_set.current_game by checking if str has is only 1 char, or matches the game_set.given_word. If it is longer than 1, does not check and does not add to game_set.current_hangman. 
-  if(strlen(str) == strlen(game_set.given_word)){ //game finished
+  if(strlen(str) == game_set.length_word){ //game finished
     if(strcmp(str_upper(str), game_set.given_word) == 0){
       int c1 = 0;
       while(c1 < game_set.length_word){
